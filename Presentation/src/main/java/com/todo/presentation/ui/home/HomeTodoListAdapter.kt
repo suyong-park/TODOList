@@ -20,12 +20,12 @@ class HomeTodoListAdapter(private val viewModel: HomeViewModel)
     )
 
     override fun onBindViewHolder(holder: HomeTodoListViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.binding(getItem(position))
     }
 
     inner class HomeTodoListViewHolder(private val binding: ItemTodoListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: TodoList) {
+        fun binding(item: TodoList) {
             with(binding) {
                 vm = viewModel
                 job = item.job
