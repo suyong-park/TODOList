@@ -43,7 +43,9 @@ abstract class BaseFragment<B: ViewDataBinding, V: BaseViewModel> : Fragment() {
 
     private fun initBaseObserver() {
         with(viewModel) {
-
+            toastEvent.observe(viewLifecycleOwner) {
+                it.show(requireContext())
+            }
         }
     }
 }

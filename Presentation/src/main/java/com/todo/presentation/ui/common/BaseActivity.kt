@@ -29,7 +29,9 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
     private fun initBaseObserver() {
         with(viewModel) {
-
+            toastEvent.observe(this@BaseActivity) {
+                it.show(baseContext)
+            }
         }
     }
 }
