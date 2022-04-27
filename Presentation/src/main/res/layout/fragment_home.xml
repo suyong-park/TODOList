@@ -14,45 +14,13 @@
         android:orientation="vertical"
         android:layout_margin="20dp" >
 
-<!--        <HorizontalScrollView-->
-<!--            android:id="@+id/horizontalScrollView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:layout_marginTop="10dp">-->
-
-<!--            <com.google.android.material.chip.ChipGroup-->
-<!--                android:id="@+id/chipGroup"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:singleLine="true">-->
-
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    style="@style/Widget.MaterialComponents.Chip.Entry"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="dummy" />-->
-
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    style="@style/Widget.MaterialComponents.Chip.Entry"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="dummy2" />-->
-
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    style="@style/Widget.MaterialComponents.Chip.Entry"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="dummy3" />-->
-
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    style="@style/Widget.MaterialComponents.Chip.Entry"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="dummy4" />-->
-
-<!--            </com.google.android.material.chip.ChipGroup>-->
-<!--        </HorizontalScrollView>-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:contentDescription="TODO" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/todo_rv"

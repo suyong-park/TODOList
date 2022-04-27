@@ -41,7 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             TodoList(6, "더미 데이터 입니다."),
             TodoList(7, "토이 프로젝트입니다."),
             TodoList(8, "테스트 진행합니다."),
-            TodoList(9, "안드로이드 MVVM 공부중입니다."),
+            TodoList(9, "안드로이드 MVVM, Clean Architecture 공부하고 있습니다."),
             TodoList(10, "spdlqjfire@naver.com"),
             TodoList(11, "즐거운 TODO List")
         )
