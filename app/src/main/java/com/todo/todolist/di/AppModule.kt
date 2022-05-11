@@ -6,6 +6,7 @@ import com.todo.core.log.LogFileLogger
 import com.todo.core.log.Logger
 import com.todo.presentation.ui.calendar.CalendarViewModel
 import com.todo.presentation.ui.common.BaseViewModel
+import com.todo.presentation.ui.home.HomeDialogViewModel
 import com.todo.presentation.ui.home.HomeViewModel
 import com.todo.presentation.ui.intro.IntroViewModel
 import com.todo.presentation.ui.setting.SettingViewModel
@@ -15,6 +16,7 @@ import org.koin.dsl.module
 val viewModelModules = module {
     viewModel { BaseViewModel() }
     viewModel { HomeViewModel() }
+    viewModel { HomeDialogViewModel() }
     viewModel { CalendarViewModel() }
     viewModel { IntroViewModel() }
     viewModel { SettingViewModel() }

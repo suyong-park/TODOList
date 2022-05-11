@@ -7,4 +7,9 @@
     <!-- Home -->
     <string name="btn_add_todo">일정 추가</string>
     <string name="text_add_todo">일정이 없습니다.\n추가하시겠습니까?</string>
+
+    <!-- Home Bottom Sheet Dialog -->
+    <string name="edit_text_title">제목 입력</string>
+    <string name="switch_all_day">하루 종일</string>
+    <string name="btn_add">추가</string>
 </resources>
