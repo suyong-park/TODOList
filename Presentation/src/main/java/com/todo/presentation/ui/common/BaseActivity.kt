@@ -4,8 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.todo.core.log.Logger
+import org.koin.android.ext.android.inject
 
 abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatActivity() {
+
+    private val logger: Logger by inject()
 
     lateinit var binding: B
 

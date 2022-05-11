@@ -2,7 +2,7 @@ package com.todo.core.log
 
 import android.util.Log
 
-object LogWrite : Logger {
+class AndroidLogger : Logger {
     override fun error(tag: String, msg: String, throwable: Throwable?) {
         Log.e(tag, "$msg\n${throwable?.message}")
     }

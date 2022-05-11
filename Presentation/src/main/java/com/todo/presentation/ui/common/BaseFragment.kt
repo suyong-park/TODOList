@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.todo.core.log.Logger
+import org.koin.android.ext.android.inject
 
 abstract class BaseFragment<B: ViewDataBinding, V: BaseViewModel> : Fragment() {
+
+    private val logger: Logger by inject()
 
     protected lateinit var binding: B
 

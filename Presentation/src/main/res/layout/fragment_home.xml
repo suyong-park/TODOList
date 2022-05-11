@@ -6,6 +6,10 @@
 
     <data>
 
+        <variable
+            name="homeViewModel"
+            type="com.todo.presentation.ui.home.HomeViewModel" />
+
     </data>
 
     <LinearLayout
@@ -14,13 +18,29 @@
         android:orientation="vertical"
         android:layout_margin="20dp" >
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating_action_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
-            android:contentDescription="TODO" />
+        <LinearLayout
+            android:id="@+id/empty_todo_list_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="30dp"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/text_add_todo" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="@{() -> homeViewModel.onClickAddTodo()}"
+                android:text="@string/btn_add_todo" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/todo_rv"
