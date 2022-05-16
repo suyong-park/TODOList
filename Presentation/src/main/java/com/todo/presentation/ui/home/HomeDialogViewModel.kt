@@ -1,15 +1,27 @@
 package com.todo.presentation.ui.home
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import com.todo.presentation.ui.common.BaseViewModel
-import com.todo.presentation.ui.common.SingleLiveEvent
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 
 class HomeDialogViewModel : BaseViewModel() {
 
-    private val _isDone = SingleLiveEvent<Boolean>()
-    val isDone: LiveData<Boolean> = _isDone
+    private val _isDone = MutableSharedFlow<Any>()
+    val isDone = _isDone.asSharedFlow()
 
     fun onClickAddTodoBtn() {
-        _isDone.value = true
+        event(Event.AddTodo)
+    }
+
+    private fun event(event: Event) {
+        viewModelScope.launch {
+            _isDone.emit(event)
+        }
+    }
+
+    sealed class Event {
+        object AddTodo : Event()
     }
 }

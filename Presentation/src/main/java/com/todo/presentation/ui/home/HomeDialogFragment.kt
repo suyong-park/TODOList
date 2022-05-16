@@ -1,15 +1,17 @@
 package com.todo.presentation.ui.home
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.todo.presentation.R
 import com.todo.presentation.databinding.DialogHomeAddTodoBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class HomeDialogFragment : BottomSheetDialogFragment() {
 
@@ -39,9 +41,9 @@ class HomeDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun initObserver() {
-        with(binding) {
-            viewModel.isDone.observe(viewLifecycleOwner) {
-                if (it) {
+        with(viewModel) {
+            lifecycleScope.launch {
+                isDone.collect {
                     dismiss()
                 }
             }

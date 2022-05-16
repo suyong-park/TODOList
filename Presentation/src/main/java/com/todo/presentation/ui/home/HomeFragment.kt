@@ -1,13 +1,15 @@
 package com.todo.presentation.ui.home
 
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.todo.domain.home.TodoList
 import com.todo.presentation.R
 import com.todo.presentation.databinding.FragmentHomeBinding
 import com.todo.presentation.ext.gone
 import com.todo.presentation.ext.visible
 import com.todo.presentation.ui.common.BaseFragment
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
@@ -31,8 +33,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun initObserver() {
         with(viewModel) {
-            addTodo.observe(viewLifecycleOwner) { isClickAdd ->
-                if (isClickAdd) {
+            lifecycleScope.launch {
+                addTodo.collect {
                     HomeDialogFragment().show(childFragmentManager, "")
                 }
             }
