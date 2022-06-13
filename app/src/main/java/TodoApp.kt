@@ -1,12 +1,14 @@
+package com.todo.todolist
+
 import android.app.Application
 import com.google.firebase.FirebaseApp
 import com.todo.core.log.LogFileLogger
-import com.todo.todolist.BuildConfig
 import com.todo.todolist.di.appModules
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 class TodoApp : Application() {
 
@@ -22,7 +24,7 @@ class TodoApp : Application() {
 
     private fun initKoin() {
         startKoin {
-            androidLogger()
+            androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(applicationContext)
             modules(appModules)
         }
