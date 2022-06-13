@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.todo.presentation.R
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class HomeDialogFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: DialogHomeAddTodoBinding
-    private val viewModel: HomeDialogViewModel by viewModels()
+    private val viewModel: HomeDialogViewModel by viewModel()
 
     override fun getTheme(): Int = R.style.AppBottomSheetDialogTheme
 
