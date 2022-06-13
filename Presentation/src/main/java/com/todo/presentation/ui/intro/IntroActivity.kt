@@ -25,8 +25,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding, IntroViewModel>() {
                 when (position) {
                     0 -> tab.text = getString(R.string.home)
                     1 -> tab.text = getString(R.string.calendar)
-                    2 -> tab.text = getString(R.string.analysis)
-                    3 -> tab.text = getString(R.string.setting)
+                    2 -> tab.text = getString(R.string.setting)
                 }
             }.attach()
         }

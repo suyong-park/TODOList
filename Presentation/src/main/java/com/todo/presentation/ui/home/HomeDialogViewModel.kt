@@ -6,22 +6,22 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel : BaseViewModel() {
+class HomeDialogViewModel : BaseViewModel() {
 
-    private val _addTodo = MutableSharedFlow<Any>()
-    val addTodo = _addTodo.asSharedFlow()
+    private val _isDone = MutableSharedFlow<Any>()
+    val isDone = _isDone.asSharedFlow()
 
-    fun onClickAddTodo() {
-        event(Event.Add)
+    fun onClickAddTodoBtn() {
+        event(Event.AddTodo)
     }
 
     private fun event(event: Event) {
         viewModelScope.launch {
-            _addTodo.emit(event)
+            _isDone.emit(event)
         }
     }
 
     sealed class Event {
-        object Add : Event()
+        object AddTodo : Event()
     }
 }

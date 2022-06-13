@@ -7,8 +7,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.todo.core.log.Logger
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+import com.todo.presentation.ui.common.BaseViewModel.Event
 
 abstract class BaseFragment<B: ViewDataBinding, V: BaseViewModel> : Fragment() {
+
+    private val logger: Logger by inject()
 
     protected lateinit var binding: B
 
@@ -18,6 +26,8 @@ abstract class BaseFragment<B: ViewDataBinding, V: BaseViewModel> : Fragment() {
     abstract fun setBindingVariables()
     abstract fun initObserver()
     abstract fun initView()
+
+    protected open fun handleEvent(event: Event) {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,8 +53,10 @@ abstract class BaseFragment<B: ViewDataBinding, V: BaseViewModel> : Fragment() {
 
     private fun initBaseObserver() {
         with(viewModel) {
-            toastEvent.observe(viewLifecycleOwner) {
-                it.show(requireContext())
+            lifecycleScope.launch {
+                toastEvent.collect { event ->
+                    handleEvent(event)
+                }
             }
         }
     }

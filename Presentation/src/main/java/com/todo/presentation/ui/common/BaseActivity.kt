@@ -4,8 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.lifecycleScope
+import com.todo.core.log.Logger
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatActivity() {
+
+    private val logger: Logger by inject()
 
     lateinit var binding: B
 
@@ -14,6 +21,8 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
     abstract fun setBindingVariables()
     abstract fun initView()
+
+    protected open fun handleEvent(event: BaseViewModel.Event) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +38,10 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
     private fun initBaseObserver() {
         with(viewModel) {
-            toastEvent.observe(this@BaseActivity) {
-                it.show(baseContext)
+            lifecycleScope.launch {
+                toastEvent.collect { event ->
+                    handleEvent(event)
+                }
             }
         }
     }
