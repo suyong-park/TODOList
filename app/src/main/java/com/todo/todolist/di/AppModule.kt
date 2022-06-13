@@ -1,9 +1,6 @@
 package com.todo.todolist.di
 
-import com.todo.core.log.AndroidLogger
-import com.todo.core.log.CombinedLogger
-import com.todo.core.log.LogFileLogger
-import com.todo.core.log.Logger
+import com.todo.core.log.*
 import com.todo.presentation.ui.calendar.CalendarViewModel
 import com.todo.presentation.ui.common.BaseViewModel
 import com.todo.presentation.ui.home.HomeDialogViewModel
@@ -25,7 +22,8 @@ val viewModelModules = module {
 val loggerModules = module {
     single { AndroidLogger() }
     single { LogFileLogger() }
-    single<Logger> { CombinedLogger(listOf(AndroidLogger(), LogFileLogger())) }
+    single { CrashlyticsLogger() }
+    single<Logger> { CombinedLogger(listOf(AndroidLogger(), LogFileLogger(), CrashlyticsLogger())) }
 }
 
 val repositoryModules = module {
