@@ -13,6 +13,7 @@ import com.todo.presentation.R
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import com.todo.presentation.ui.common.BaseViewModel.ToastEvent
 
 abstract class BaseBottomDialogFragment<B : ViewDataBinding, V : BaseViewModel> :
     BottomSheetDialogFragment() {
@@ -26,7 +27,7 @@ abstract class BaseBottomDialogFragment<B : ViewDataBinding, V : BaseViewModel> 
     abstract fun setBindingVariables()
     abstract fun initObserver()
     abstract fun initView()
-    protected open fun handleEvent(event: BaseViewModel.Event) {}
+    protected open fun handleEvent(event: ToastEvent) {}
 
     override fun getTheme(): Int = R.style.AppBottomSheetDialogTheme
 

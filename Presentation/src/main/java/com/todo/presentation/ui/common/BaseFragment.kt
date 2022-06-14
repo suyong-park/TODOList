@@ -12,7 +12,7 @@ import com.todo.core.log.Logger
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import com.todo.presentation.ui.common.BaseViewModel.Event
+import com.todo.presentation.ui.common.BaseViewModel.ToastEvent
 
 abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : Fragment() {
 
@@ -27,7 +27,8 @@ abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : Fragment()
     abstract fun initObserver()
     abstract fun initView()
 
-    protected open fun handleEvent(event: Event) {}
+    protected open fun handleEvent(event: ToastEvent) {}
+    protected open fun navigation(navigation: BaseNavigation) {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,14 +39,13 @@ abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : Fragment()
             lifecycleOwner = viewLifecycleOwner
         }
 
-        setBindingVariables()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setBindingVariables()
         initBaseObserver()
         initObserver()
         initView()
@@ -56,6 +56,10 @@ abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : Fragment()
             lifecycleScope.launch {
                 toastEvent.collect { event ->
                     handleEvent(event)
+                }
+
+                navigation.collect {
+                    navigation(it)
                 }
             }
         }
