@@ -4,8 +4,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.todo.presentation.R
 import com.todo.presentation.databinding.FragmentHomeBinding
-import com.todo.presentation.ext.gone
-import com.todo.presentation.ext.visible
 import com.todo.presentation.ui.common.BaseFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -19,35 +17,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private val homeListAdapter by lazy { HomeTodoListAdapter(viewModel) }
 
     override fun initView() {
-        with(binding.todoRv) {
-            adapter = homeListAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
-
-        showEmptyTodoList()
+        initAdapter()
     }
 
     override fun setBindingVariables() {
-        binding.homeViewModel = viewModel
+        with(binding) {
+            homeViewModel = viewModel
+            itemCount = homeListAdapter.itemCount
+        }
     }
 
     override fun initObserver() {
         with(viewModel) {
             lifecycleScope.launch {
                 addTodo.collect {
-                    HomeDialogFragment().show(childFragmentManager, "")
+                    HomeDialogFragment().show(childFragmentManager, HomeDialogFragment.TAG)
                 }
             }
         }
     }
 
-    private fun showEmptyTodoList() {
-        with(binding.emptyTodoListLayout) {
-            if (homeListAdapter.itemCount == 0) {
-                visible()
-            } else {
-                gone()
-            }
+    private fun initAdapter() {
+        with(binding.todoRv) {
+            adapter = homeListAdapter
+            layoutManager = LinearLayoutManager(context)
         }
     }
 }

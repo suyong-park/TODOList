@@ -12,15 +12,21 @@ class IntroActivity : BaseActivity<ActivityIntroBinding, IntroViewModel>() {
     override val layoutRes = R.layout.activity_intro
     override val viewModel: IntroViewModel by viewModel()
 
-    override fun setBindingVariables() {
+    override fun setBindingVariables() {}
+    override fun initView() {
+        initViewPagerAdapter()
+        initTabMediator()
     }
 
-    override fun initView() {
-        with(binding) {
-            viewPager.apply {
-                adapter = PagerAdapter(context as FragmentActivity)
-            }
+    private fun initViewPagerAdapter() {
+        with(binding.viewPager) {
+            adapter = IntroPagerAdapter(supportFragmentManager, lifecycle)
+            offscreenPageLimit = (adapter as IntroPagerAdapter).itemCount - 1
+        }
+    }
 
+    private fun initTabMediator() {
+        with(binding) {
             TabLayoutMediator(tab, viewPager) { tab, position ->
                 when (position) {
                     0 -> tab.text = getString(R.string.home)
