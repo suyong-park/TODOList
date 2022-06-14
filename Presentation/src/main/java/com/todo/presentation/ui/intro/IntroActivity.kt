@@ -1,6 +1,6 @@
 package com.todo.presentation.ui.intro
 
-import androidx.activity.viewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.todo.presentation.R
@@ -10,7 +10,7 @@ import com.todo.presentation.ui.common.BaseActivity
 class IntroActivity : BaseActivity<ActivityIntroBinding, IntroViewModel>() {
 
     override val layoutRes = R.layout.activity_intro
-    override val viewModel: IntroViewModel by viewModels()
+    override val viewModel: IntroViewModel by viewModel()
 
     override fun setBindingVariables() {
     }

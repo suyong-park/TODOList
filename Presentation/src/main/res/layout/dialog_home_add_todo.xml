@@ -21,18 +21,11 @@
         android:paddingBottom="30dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-        <com.github.florent37.materialtextfield.MaterialTextField
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:mtf_image="@drawable/ic_baseline_title_24"
-            app:mtf_labelColor="@color/black">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/edit_text_title"
-                android:textSize="15sp" />
-        </com.github.florent37.materialtextfield.MaterialTextField>
+            android:hint="@string/edit_text_title"
+            android:textSize="15sp" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"

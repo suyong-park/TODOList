@@ -1,6 +1,5 @@
 package com.todo.presentation.ui.home
 
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.todo.presentation.R
@@ -10,11 +9,12 @@ import com.todo.presentation.ext.visible
 import com.todo.presentation.ui.common.BaseFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override val layoutRes = R.layout.fragment_home
-    override val viewModel: HomeViewModel by viewModels()
+    override val viewModel: HomeViewModel by viewModel()
 
     private val homeListAdapter by lazy { HomeTodoListAdapter(viewModel) }
 
