@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <data>
@@ -9,6 +7,12 @@
         <variable
             name="homeViewModel"
             type="com.todo.presentation.ui.home.HomeViewModel" />
+        
+        <variable
+            name="itemCount"
+            type="int" />
+
+        <import type="android.view.View" />
 
     </data>
 
@@ -24,7 +28,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:padding="30dp"
-            android:visibility="gone"
+            android:visibility="@{itemCount == 0 ? View.VISIBLE : View.GONE}"
             android:layout_margin="10dp"
             android:orientation="vertical" >
 

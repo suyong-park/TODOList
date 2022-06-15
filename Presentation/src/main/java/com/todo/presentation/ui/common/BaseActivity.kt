@@ -9,6 +9,7 @@ import com.todo.core.log.Logger
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import com.todo.presentation.ui.common.BaseViewModel.ToastEvent
 
 abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatActivity() {
 
@@ -22,7 +23,8 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
     abstract fun setBindingVariables()
     abstract fun initView()
 
-    protected open fun handleEvent(event: BaseViewModel.Event) {}
+    protected open fun handleEvent(event: ToastEvent) {}
+    protected open fun navigation(navigation: BaseNavigation) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,10 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
             lifecycleScope.launch {
                 toastEvent.collect { event ->
                     handleEvent(event)
+                }
+
+                navigation.collect {
+                    navigation(it)
                 }
             }
         }

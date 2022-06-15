@@ -6,18 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.todo.core.log.Logger
+import com.todo.presentation.R
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import com.todo.presentation.ui.common.BaseViewModel.ToastEvent
 
-abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : Fragment() {
+abstract class BaseBottomDialogFragment<B : ViewDataBinding, V : BaseViewModel> :
+    BottomSheetDialogFragment() {
 
-    private val logger: Logger by inject()
-
+    protected val logger: Logger by inject()
     protected lateinit var binding: B
 
     abstract val layoutRes: Int
@@ -26,18 +27,20 @@ abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : Fragment()
     abstract fun setBindingVariables()
     abstract fun initObserver()
     abstract fun initView()
-
     protected open fun handleEvent(event: ToastEvent) {}
-    protected open fun navigation(navigation: BaseNavigation) {}
+
+    override fun getTheme(): Int = R.style.AppBottomSheetDialogTheme
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate<B>(layoutInflater, layoutRes, container, false).apply {
-            lifecycleOwner = viewLifecycleOwner
-        }
+    ): View {
+        binding =
+            DataBindingUtil.inflate<B>(inflater, layoutRes, container, false)
+                .apply { lifecycleOwner = viewLifecycleOwner }
+
+        setBindingVariables()
 
         return binding.root
     }
@@ -45,7 +48,6 @@ abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setBindingVariables()
         initBaseObserver()
         initObserver()
         initView()
@@ -56,10 +58,6 @@ abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> : Fragment()
             lifecycleScope.launch {
                 toastEvent.collect { event ->
                     handleEvent(event)
-                }
-
-                navigation.collect {
-                    navigation(it)
                 }
             }
         }
